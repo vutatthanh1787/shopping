@@ -10,8 +10,11 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
 	}else{
 		$sql_p = "SELECT * FROM products WHERE id=$id";
 		$query_p = $conn->query($sql_p);
-		if ($result->num_rows > 0){
-			$row_p = $result->fetch_assoc();
+		$num_p = mysqli_num_rows($query_p);
+		//die('22222');
+		if ($num_p > 0){
+			//die('111111111');
+			$row_p = $query_p->fetch_assoc();
 			$_SESSION['cart'][$row_p['id']] = array(
 				"quantity" => 1, 
 				"price" => $row_p['productPrice']);
